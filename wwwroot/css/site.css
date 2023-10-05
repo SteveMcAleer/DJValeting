@@ -38,6 +38,24 @@ a, .btn-link {
     color: red;
 }
 
+th, td {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+th {
+    font-weight: bold;
+}
+
+.appt-form-control {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+appt-form-label {
+    width: 200px;
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;

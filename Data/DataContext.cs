@@ -12,7 +12,7 @@ public class DataContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        string connectionString = _configuration.GetConnectionString("UserConnection");
+        string? connectionString = _configuration.GetConnectionString("UserConnection");
         options.UseSqlServer(connectionString);
     }
 

@@ -1,0 +1,46 @@
+@using DJValeting.Models
+
+@page "/AdminArea"
+
+<h3>Admin Area</h3>
+
+<AuthorizeView>
+    <Authorized>
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Booking Date</th>
+                <th>Flexibility</th>
+                <th>Vehicle Size</th>
+                <th>Contact Number</th>
+                <th>Email Address</th>
+            </thead>
+            <tbody>
+                @foreach (var appointment in appointments)
+                    {
+                        <AppointmentDetailRow Appointment=@appointment />
+                    }
+            </tbody>
+        </table>
+    </Authorized>
+    <NotAuthorized>
+        <p>Please login to view the admin area.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@inject IDataQueryService DataQueryService
+
+@code
+{
+    private List<Appointment> appointments = new List<Appointment>();
+
+    protected override void OnInitialized()
+    {
+        GetAppointmentList();
+    }
+
+    private void GetAppointmentList()
+    {
+        appointments = DataQueryService.GetAppointments();
+    }
+}

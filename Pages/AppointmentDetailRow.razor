@@ -1,0 +1,27 @@
+@using DJValeting.Constants;
+@using DJValeting.Models;
+
+<tr>
+    <td>@Appointment.Name</td>
+    <td>@DateOnly.FromDateTime(Appointment.BookingDate)</td>
+    <td>@GetFlexibilityText(Appointment.Flexibility)</td>
+    <td>@GetVehicleSizeText(Appointment.VehicleSize)</td>
+    <td>@Appointment.ContactNumber</td>
+    <td>@Appointment.EmailAddress</td>
+</tr>
+
+@code
+{
+    [Parameter]
+    public Appointment Appointment { get; set; } = new();
+
+    private string GetFlexibilityText(string flexibility)
+    {
+        return Flexibility.GetDisplayText(flexibility);
+    }
+
+    private string GetVehicleSizeText(string vehicleSize)
+    {
+        return VehicleSize.GetDisplayText(vehicleSize);
+    }
+}

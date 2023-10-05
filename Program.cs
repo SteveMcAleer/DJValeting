@@ -26,6 +26,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<DataContext>();
 // Command service used for add/update/delete
 builder.Services.AddScoped<IDataCommandService, DataCommandService>();
+// Query service used for selects
+builder.Services.AddScoped<IDataQueryService, DataQueryService>();
 
 var app = builder.Build();
 

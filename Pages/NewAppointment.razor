@@ -7,19 +7,19 @@
 
 <EditForm Model="@Appointment" OnValidSubmit="@Submit">
     <DataAnnotationsValidator />
-    <div>
-        <label>
+    <div class="appt-form-control">
+        <label class=>
             Name: <InputText @bind-Value="Appointment.Name" />
         </label>
         <ValidationMessage For="@(() => Appointment.Name)" />
     </div>
-    <div>
+    <div class="appt-form-control">
         <label>
             Booking Date: <InputDate @bind-Value="Appointment.BookingDate" />
         </label>
         <ValidationMessage For="@(() => Appointment.BookingDate)" />
     </div>
-    <div>
+    <div class="appt-form-control">
         <label>
             Flexibility: 
             <InputSelect @bind-Value="Appointment.Flexibility">
@@ -31,7 +31,7 @@
         </label>
         <ValidationMessage For="@(() => Appointment.Flexibility)" />
     </div>
-    <div>
+    <div class="appt-form-control">
         <label>
             Vehicle Size: 
             <InputSelect @bind-Value="Appointment.VehicleSize">
@@ -44,23 +44,21 @@
         </label>
         <ValidationMessage For="@(() => Appointment.VehicleSize)" />
     </div>
-    <div>
+    <div class="appt-form-control">
         <label>
             Contact Number: <InputText @bind-Value="Appointment.ContactNumber" />
         </label>
         <ValidationMessage For="@(() => Appointment.ContactNumber)" />
     </div>
-    <div>
+    <div class="appt-form-control">
         <label>
             Email Address: <InputText @bind-Value="Appointment.EmailAddress" />
         </label>
         <ValidationMessage For="@(() => Appointment.EmailAddress)" />
     </div>
     
-    <button type="submit">Submit</button>
+    <button class="btn btn-primary" type="submit">Submit</button>
 </EditForm>
-
-<button class="btn btn-primary" @onclick="AddTestRecord">Add Test Record</button>
 
 @using DJValeting.Entities
 @inject IDataCommandService DataCommandService
@@ -80,20 +78,7 @@
     private void Submit()
     {
         DataCommandService.CreateAppointment(Appointment);
-    }
-    
-    private void AddTestRecord()
-    {
-        Appointment testAppointment = new Appointment
-        {
-            Name = "Customer Name",
-            BookingDate = DateTime.Now.AddDays(1),
-            Flexibility = Flexibility.OneDay,
-            VehicleSize = VehicleSize.Medium,
-            ContactNumber = "07777 123456",
-            EmailAddress = "test@newaddress.com"
-        };
 
-        DataCommandService.CreateAppointment(testAppointment);
+        //TODO some sort of notification to the user that the request has been made
     }
 }
