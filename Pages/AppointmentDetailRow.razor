@@ -1,24 +1,49 @@
 @using DJValeting.Constants;
 @using DJValeting.Models;
 
-<tr>
-    <td>@Appointment.Name</td>
-    <td>@DateOnly.FromDateTime(Appointment.BookingDate)</td>
-    <td>@GetFlexibilityText(Appointment.Flexibility)</td>
-    <td>@GetVehicleSizeText(Appointment.VehicleSize)</td>
-    <td>@Appointment.ContactNumber</td>
-    <td>@Appointment.EmailAddress</td>
-    <td>
-        @if (Appointment.Approved)
-        {
-            <p>tick</p>
-        }
-        else
-        {
-            <button class="btn btn-primary" @onclick="() => ApproveAppointment(Appointment.Id)">Approve</button>
-        }
-    </td>
-</tr>
+<!-- VSCode is throwing a tizzy and I'm out of time, so this is a hack to make the row colours show up differently when approved :) -->
+@if (Appointment.Approved)
+{
+    <tr class="unapproved-row">
+        <td>@Appointment.Name</td>
+        <td>@DateOnly.FromDateTime(Appointment.BookingDate)</td>
+        <td>@GetFlexibilityText(Appointment.Flexibility)</td>
+        <td>@GetVehicleSizeText(Appointment.VehicleSize)</td>
+        <td>@Appointment.ContactNumber</td>
+        <td>@Appointment.EmailAddress</td>
+        <td>
+            @if (Appointment.Approved)
+            {
+                <p>tick</p>
+            }
+            else
+            {
+                <button class="btn btn-primary" @onclick="() => ApproveAppointment(Appointment.Id)">Approve</button>
+            }
+        </td>
+    </tr>
+}
+else
+{
+    <tr class="approved-row">
+        <td>@Appointment.Name</td>
+        <td>@DateOnly.FromDateTime(Appointment.BookingDate)</td>
+        <td>@GetFlexibilityText(Appointment.Flexibility)</td>
+        <td>@GetVehicleSizeText(Appointment.VehicleSize)</td>
+        <td>@Appointment.ContactNumber</td>
+        <td>@Appointment.EmailAddress</td>
+        <td>
+            @if (Appointment.Approved)
+            {
+                <p>tick</p>
+            }
+            else
+            {
+                <button class="btn btn-primary" @onclick="() => ApproveAppointment(Appointment.Id)">Approve</button>
+            }
+        </td>
+    </tr>
+}
 
 @inject IDataCommandService DataCommandService;
 

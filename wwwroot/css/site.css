@@ -52,6 +52,14 @@ th {
     padding: 10px;
 }
 
+.approved-row {
+    background-color:darkseagreen;
+}
+
+.unapproved-row {
+    background-color:bisque;
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
