@@ -19,7 +19,13 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
-builder.Services.AddSingleton<WeatherForecastService>();
+
+// AutoMapper used to map between database entity and app model objects
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+// User database context
+builder.Services.AddDbContext<DataContext>();
+// Command service used for add/update/delete
+builder.Services.AddScoped<IDataCommandService, DataCommandService>();
 
 var app = builder.Build();
 

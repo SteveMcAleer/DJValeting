@@ -1,0 +1,99 @@
+@using DJValeting.Constants;
+@using DJValeting.Models;
+
+@page "/NewAppointment"
+
+<h3>Request an Appointment</h3>
+
+<EditForm Model="@Appointment" OnValidSubmit="@Submit">
+    <DataAnnotationsValidator />
+    <div>
+        <label>
+            Name: <InputText @bind-Value="Appointment.Name" />
+        </label>
+        <ValidationMessage For="@(() => Appointment.Name)" />
+    </div>
+    <div>
+        <label>
+            Booking Date: <InputDate @bind-Value="Appointment.BookingDate" />
+        </label>
+        <ValidationMessage For="@(() => Appointment.BookingDate)" />
+    </div>
+    <div>
+        <label>
+            Flexibility: 
+            <InputSelect @bind-Value="Appointment.Flexibility">
+                <option value="" default>Please choose flexibility...</option>
+                <option value="@Flexibility.OneDay">@GetFlexibilityText(Flexibility.OneDay)</option>
+                <option value="@Flexibility.TwoDays">@GetFlexibilityText(Flexibility.TwoDays)</option>
+                <option value="@Flexibility.ThreeDays">@GetFlexibilityText(Flexibility.ThreeDays)</option>
+            </InputSelect>
+        </label>
+        <ValidationMessage For="@(() => Appointment.Flexibility)" />
+    </div>
+    <div>
+        <label>
+            Vehicle Size: 
+            <InputSelect @bind-Value="Appointment.VehicleSize">
+                <option value="" default>Please choose vehicle size...</option>
+                <option value="@VehicleSize.Small">@GetVehicleSizeText(VehicleSize.Small)</option>
+                <option value="@VehicleSize.Medium">@GetVehicleSizeText(VehicleSize.Medium)</option>
+                <option value="@VehicleSize.Large">@GetVehicleSizeText(VehicleSize.Large)</option>
+                <option value="@VehicleSize.Van">@GetVehicleSizeText(VehicleSize.Van)</option>
+            </InputSelect>
+        </label>
+        <ValidationMessage For="@(() => Appointment.VehicleSize)" />
+    </div>
+    <div>
+        <label>
+            Contact Number: <InputText @bind-Value="Appointment.ContactNumber" />
+        </label>
+        <ValidationMessage For="@(() => Appointment.ContactNumber)" />
+    </div>
+    <div>
+        <label>
+            Email Address: <InputText @bind-Value="Appointment.EmailAddress" />
+        </label>
+        <ValidationMessage For="@(() => Appointment.EmailAddress)" />
+    </div>
+    
+    <button type="submit">Submit</button>
+</EditForm>
+
+<button class="btn btn-primary" @onclick="AddTestRecord">Add Test Record</button>
+
+@using DJValeting.Entities
+@inject IDataCommandService DataCommandService
+@code {
+    private Appointment Appointment { get; set; } = new();
+
+    private string GetFlexibilityText(string flexibility)
+    {
+        return Flexibility.GetDisplayText(flexibility);
+    }
+
+    private string GetVehicleSizeText(string vehicleSize)
+    {
+        return VehicleSize.GetDisplayText(vehicleSize);
+    }
+
+    private void Submit()
+    {
+        DataCommandService.CreateAppointment(Appointment);
+    }
+    
+    private void AddTestRecord()
+    {
+        Appointment testAppointment = new Appointment
+        {
+            Name = "Customer Name",
+            BookingDate = DateTime.Now.AddDays(1),
+            Flexibility = Flexibility.OneDay,
+            VehicleSize = VehicleSize.Medium,
+            ContactNumber = "07777 123456",
+            EmailAddress = "test@newaddress.com"
+        };
+
+        DataCommandService.CreateAppointment(testAppointment);
+    }
+}

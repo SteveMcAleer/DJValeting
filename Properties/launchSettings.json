@@ -8,16 +8,7 @@
     }
   },
   "profiles": {
-    "http": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "applicationUrl": "http://localhost:5043",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "https": {
+    "DJValeting": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
