@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 public interface IDataQueryService
 {
     List<Appointment> GetAppointments();
+    AppointmentEntity GetAppointmentEntity(Guid? id);
 }
 
 public class DataQueryService : IDataQueryService
@@ -21,10 +22,25 @@ public class DataQueryService : IDataQueryService
 
     public List<Appointment> GetAppointments()
     {
-        List<AppointmentEntity> appointments = _context.Appointments
+        List<AppointmentEntity> appointmentEntities = _context.Appointments
             .AsNoTracking()
             .ToList();
 
-        return _mapper.Map<List<Appointment>>(appointments);
+        return _mapper.Map<List<Appointment>>(appointmentEntities);
+    }
+
+    public AppointmentEntity GetAppointmentEntity(Guid? id)
+    {
+        AppointmentEntity appointmentEntity = new AppointmentEntity();
+
+        if (id.HasValue)
+        {
+            appointmentEntity = _context.Appointments
+                .AsNoTracking()
+                .Where(a => a.Id == id)
+                .Single();
+        }
+
+        return appointmentEntity;
     }
 }

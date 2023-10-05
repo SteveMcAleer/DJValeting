@@ -26,5 +26,7 @@ namespace DJValeting.Models
         [Required]
         [StringLength(200, ErrorMessage = "Email address cannot be longer than 200 characters.")]
         public string EmailAddress { get; set; } = "";
+
+        public bool Approved { get; set; } = false;
     }
 }

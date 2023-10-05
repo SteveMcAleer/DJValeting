@@ -15,5 +15,7 @@ namespace DJValeting.Entities
         public string ContactNumber { get; set; } = "";
 
         public string EmailAddress { get; set; } = "";
+
+        public bool Approved { get; set; }
     }
 }

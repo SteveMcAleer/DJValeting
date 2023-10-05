@@ -52,10 +52,6 @@ th {
     padding: 10px;
 }
 
-appt-form-label {
-    width: 200px;
-}
-
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
